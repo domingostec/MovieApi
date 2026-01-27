@@ -15,16 +15,14 @@ public class UserService {
     }
 
     public User createUser(UserDTO dto) {
-
-        if (userRepository.findByEmail(dto.getEmail()).isPresent()) {
-            throw new IllegalArgumentException("Email already in use");
-        }
-
-        User user = new User();
+        userRepository.findByEmail(dto.getEmail())
+             .ifPresent( u -> {
+                    throw new IllegalArgumentException("Email already in use");
+             });
+      User user = new User();
         user.setEmail(dto.getEmail().toLowerCase());
-        user.setPassword(dto.getPassword()); // aqui você pode criptografar
-        user.setNumberPhone(dto.getNumberPhone());
-        
+        user.setPassword(dto.getPassword()); 
+        user.setNumberPhone(dto.getNumberPhone());      
         return userRepository.save(user);
     }
 
