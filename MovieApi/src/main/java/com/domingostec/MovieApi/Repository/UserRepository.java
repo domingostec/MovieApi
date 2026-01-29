@@ -7,4 +7,6 @@ import com.domingostec.MovieApi.Entity.User;
 
 public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByEmail(String email);
+    Optional<User> findByCredentials(String email, String password);
+    Optional<User> findByPassword(String password);
 }
