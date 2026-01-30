@@ -60,7 +60,10 @@ public class UserController {
     }
 
     @DeleteMapping("/deleteAccount")
-    public void deleteUserAccount(){
-        // Lógica para deletar a conta do usuário
+    public ResponseEntity<String> deleteUserAccount(@RequestParam String email){
+        userService.deleteUser(email);
+        return ResponseEntity.ok("User with email " + email + " deleted successfully.");
     }
+        
 }
+
