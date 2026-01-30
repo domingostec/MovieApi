@@ -1,4 +1,4 @@
-package com.domingostec.MovieApi.DTO;
+package com.domingostec.MovieApi.DTO.Request;
 
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;

@@ -5,7 +5,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import java.util.Optional;
 
 @Entity
 public class User {
@@ -18,10 +17,10 @@ public class User {
     private String name;
     private String email;
     private String password;
-    private Optional<String> numberPhone = Optional.ofNullable("Not informed");
+    private String numberPhone;
 
 
-    public User(String name, String email, String password, Optional<String> numberPhone) {
+    public User(String name, String email, String password, String numberPhone) {
         this.name = name;
         this.email = email;
         this.password = password;
@@ -47,7 +46,7 @@ public class User {
         return password;
     }
 
-    public Optional<String> getNumberPhone() {
+    public String getNumberPhone() {
         return numberPhone;
     }
 
@@ -63,7 +62,7 @@ public class User {
         this.password = password;
     }
 
-    public void setNumberPhone(Optional<String> numberPhone) {
+    public void setNumberPhone(String numberPhone) {
         this.numberPhone = numberPhone;
     }
 }
