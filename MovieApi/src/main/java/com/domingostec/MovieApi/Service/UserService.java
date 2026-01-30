@@ -1,18 +1,21 @@
 package com.domingostec.MovieApi.Service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.domingostec.MovieApi.Repository.UserRepository;
 import com.domingostec.MovieApi.DTO.UserDTO;
 import com.domingostec.MovieApi.Entity.User;
-import com.domingostec.MovieApi.Exceptions.InvalidPasswordException;
-import com.domingostec.MovieApi.Exceptions.UserAlreadyExistsExeption;
-import com.domingostec.MovieApi.Exceptions.UserNotFoundException;
+import com.domingostec.MovieApi.Exceptions.UserExceptions.InvalidPasswordException;
+import com.domingostec.MovieApi.Exceptions.UserExceptions.UserAlreadyExistsExeption;
+import com.domingostec.MovieApi.Exceptions.UserExceptions.UserNotFoundException;
 
 @Service
 public class UserService {
 
+    
     private final UserRepository userRepository;
-
+    
+    @Autowired
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }

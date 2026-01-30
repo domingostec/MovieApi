@@ -4,9 +4,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import com.domingostec.MovieApi.Exceptions.UserAlreadyExistsExeption;
-import com.domingostec.MovieApi.Exceptions.UserNotFoundException;
-import com.domingostec.MovieApi.Exceptions.InvalidPasswordException;
+
+import com.domingostec.MovieApi.Exceptions.UserExceptions.InvalidPasswordException;
+import com.domingostec.MovieApi.Exceptions.UserExceptions.UserAlreadyExistsExeption;
+import com.domingostec.MovieApi.Exceptions.UserExceptions.UserNotFoundException;
 
 @ControllerAdvice
 public class GlobalExecptionHandler {
