@@ -8,11 +8,4 @@ import com.domingostec.MovieApi.Entity.Movie;
 @Service
 public class MovieService {
 
-    
-    private final MovieRepository movieRepository;
-
-    @Autowired
-    public MovieService(MovieRepository movieRepository){
-        this.movieRepository = movieRepository;
-    }
 }

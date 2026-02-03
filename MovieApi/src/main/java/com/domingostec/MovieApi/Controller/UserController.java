@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.domingostec.MovieApi.DTO.Request.UserDTO;
 import com.domingostec.MovieApi.DTO.Response.UserResponseDTO;
 import com.domingostec.MovieApi.Service.UserService;
@@ -26,20 +25,10 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private AuthService authService;
-
     @PostMapping("/register")
     public ResponseEntity<UserResponseDTO> registerUser(@Valid @RequestBody UserDTO dto){
         UserResponseDTO response = userService.createUser(dto);
         return ResponseEntity.ok(response);
-    }
-
-    @PostMapping("/login")
-    public ResponseEntity<String> userLogin(@Valid @RequestBody UserDTO dto){
-        UserResponseDTO response = authService.loginUser(dto);
-        return ResponseEntity.ok("User " + response.getEmail() + " logged in successfully.");
-
     }
 
     @GetMapping("/profile")
@@ -70,7 +59,6 @@ public class UserController {
     public ResponseEntity<String> deleteUserAccount(@RequestParam String email){
         userService.deleteUser(email);
         return ResponseEntity.ok("User with email " + email + " deleted successfully.");
-    }
-        
+    }    
 }
 

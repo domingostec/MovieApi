@@ -8,15 +8,19 @@ import com.domingostec.MovieApi.DTO.Response.UserResponseDTO;
 import com.domingostec.MovieApi.Entity.User;
 import com.domingostec.MovieApi.Exceptions.UserExceptions.UserAlreadyExistsExeption;
 import com.domingostec.MovieApi.Exceptions.UserExceptions.UserNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Service
 public class UserService {
 
     private final UserRepository userRepository;
+
+    private PasswordEncoder passwordEncoder;
     
     @Autowired
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     private UserResponseDTO toResponse(User user){
@@ -32,13 +36,13 @@ public class UserService {
              .ifPresent(u -> {
                     throw new UserAlreadyExistsExeption("Email already in use");
              });
-      User user = new User();
+        User user = new User();
         user.setEmail(dto.getEmail().toLowerCase());
-        user.setPassword(dto.getPassword()); 
+        user.setPassword(passwordEncoder.encode(dto.getPassword())); 
         user.setNumberPhone(dto.getNumberPhone());      
-       
-        User savedUser = userRepository.save(user);
-        return toResponse(savedUser);
+       userRepository.save(user);
+
+       return new UserResponseDTO(user.getEmail(), user.getName(), user.getNumberPhone());
     }
 
     public UserResponseDTO infoUser(UserDTO dto){
