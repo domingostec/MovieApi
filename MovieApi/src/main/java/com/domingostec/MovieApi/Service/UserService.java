@@ -6,14 +6,12 @@ import com.domingostec.MovieApi.Repository.UserRepository;
 import com.domingostec.MovieApi.DTO.Request.UserDTO;
 import com.domingostec.MovieApi.DTO.Response.UserResponseDTO;
 import com.domingostec.MovieApi.Entity.User;
-import com.domingostec.MovieApi.Exceptions.UserExceptions.InvalidPasswordException;
 import com.domingostec.MovieApi.Exceptions.UserExceptions.UserAlreadyExistsExeption;
 import com.domingostec.MovieApi.Exceptions.UserExceptions.UserNotFoundException;
 
 @Service
 public class UserService {
 
-    
     private final UserRepository userRepository;
     
     @Autowired
@@ -43,15 +41,6 @@ public class UserService {
         return toResponse(savedUser);
     }
 
-    public UserResponseDTO loginUser(UserDTO dto) {
-        User user = userRepository.findByEmail(dto.getEmail())
-                                   .orElseThrow(() -> new UserNotFoundException("User not found"));
-        if (!user.getPassword().equals(dto.getPassword())) {
-            throw new InvalidPasswordException("Invalid Password");
-        }
-        return toResponse(user);
-    }
-
     public UserResponseDTO infoUser(UserDTO dto){
         User user = userRepository.findByNameAndEmailAndNumberPhone(dto.getName(), dto.getEmail(), dto.getNumberPhone())
                                 .orElseThrow(() -> new UserNotFoundException("User not found"));
@@ -62,5 +51,15 @@ public class UserService {
         User user = userRepository.findByEmail(email)
                                   .orElseThrow(() -> new UserNotFoundException("User not found"));
         userRepository.delete(user);
+    }
+
+    public UserResponseDTO updateUserEmail(String currentEmail, String newEmail){
+        User user = userRepository.findByEmail(currentEmail)
+                                  .orElseThrow(() -> new UserNotFoundException("User not found"));
+        if(userRepository.existsByEmail(newEmail)){
+            throw new UserAlreadyExistsExeption("Email already in use");
+        }                          
+        user.setEmail(newEmail);
+        return toResponse(userRepository.save(user));
     }
 }

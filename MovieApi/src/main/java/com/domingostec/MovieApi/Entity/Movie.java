@@ -4,6 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Movie {
@@ -16,6 +18,10 @@ public class Movie {
     private String description;
     private String genre;
     private double note;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public Movie(String title, String description, String genre, double note) {
         this.title = title;

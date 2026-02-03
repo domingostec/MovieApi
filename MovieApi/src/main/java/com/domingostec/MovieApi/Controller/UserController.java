@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.domingostec.MovieApi.DTO.Request.UserDTO;
 import com.domingostec.MovieApi.DTO.Response.UserResponseDTO;
 import com.domingostec.MovieApi.Service.UserService;
+import com.domingostec.MovieApi.Service.AuthService;
 
 import jakarta.validation.Valid;
 
@@ -25,6 +26,9 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private AuthService authService;
+
     @PostMapping("/register")
     public ResponseEntity<UserResponseDTO> registerUser(@Valid @RequestBody UserDTO dto){
         UserResponseDTO response = userService.createUser(dto);
@@ -32,8 +36,8 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> loginUser(@Valid @RequestBody UserDTO dto){
-        UserResponseDTO response = userService.loginUser(dto);
+    public ResponseEntity<String> userLogin(@Valid @RequestBody UserDTO dto){
+        UserResponseDTO response = authService.loginUser(dto);
         return ResponseEntity.ok("User " + response.getEmail() + " logged in successfully.");
 
     }
@@ -55,10 +59,13 @@ public class UserController {
     }
 
     @PutMapping("/updateProfile")
-    public void updateUserProfile(){
-        // Lógica para atualizar o perfil do usuário
+    public ResponseEntity<UserResponseDTO> updateUserProfile(
+        @RequestParam String currentEmail,
+        @RequestParam String newEmail){
+        UserResponseDTO response = userService.updateUserEmail(currentEmail, newEmail);
+        return ResponseEntity.ok(response);
     }
-
+    
     @DeleteMapping("/deleteAccount")
     public ResponseEntity<String> deleteUserAccount(@RequestParam String email){
         userService.deleteUser(email);
