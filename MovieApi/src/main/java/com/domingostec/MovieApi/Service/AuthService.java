@@ -2,22 +2,19 @@ package com.domingostec.MovieApi.Service;
 
 import com.domingostec.MovieApi.DTO.Request.UserDTO;
 import com.domingostec.MovieApi.DTO.Response.AuthResponseDTO;
-import com.domingostec.MovieApi.DTO.Response.UserResponseDTO;
 import com.domingostec.MovieApi.Entity.User;
 import com.domingostec.MovieApi.Exceptions.UserExceptions.InvalidPasswordException;
 import com.domingostec.MovieApi.Exceptions.UserExceptions.UserNotFoundException;
 import com.domingostec.MovieApi.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
-import io.jsonwebtoken.Jws;
+import org.springframework.stereotype.Service;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
-import io.jsonwebtoken.Claims;
 import java.util.Date;
 import javax.crypto.SecretKey;
 
-
+@Service
 public class AuthService {
 
     @Autowired

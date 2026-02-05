@@ -81,7 +81,13 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
-    </dependency>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.32</version> <!-- versão estável mais recente -->
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

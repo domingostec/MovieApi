@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.domingostec.MovieApi.DTO.Request.UserDTO;
 import com.domingostec.MovieApi.DTO.Response.UserResponseDTO;
 import com.domingostec.MovieApi.Service.UserService;
-import com.domingostec.MovieApi.Service.AuthService;
 
 import jakarta.validation.Valid;
 
