@@ -18,4 +18,3 @@ public class AuthController {
         return authService.loginUser(dto);
     }
 }
-

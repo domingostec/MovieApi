@@ -30,9 +30,7 @@ public class MovieService {
 
 
     public MovieResponseDTO createMovie(MovieDTO dto){
-        if (movieRepository.existsByTitle(dto.getTitle())) {
-            throw new InvalidTitleExeption("The title already exists.");
-        }
+        if (movieRepository.existsByTitle(dto.getTitle())) {throw new InvalidTitleExeption("The title already exists.");}
 
         Movie newMovie = Movie.builder()
         .title(dto.getTitle())
@@ -43,10 +41,12 @@ public class MovieService {
         .build();
 
         movieRepository.save(newMovie);
-
         return toResponse(newMovie);
     }
 
+    public MovieResponseDTO listAllMovies(MovieDTO dto){
+            return null;
+    }
 
 
 
