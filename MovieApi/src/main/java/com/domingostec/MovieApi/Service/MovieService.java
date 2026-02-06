@@ -13,6 +13,7 @@ import com.domingostec.MovieApi.Exceptions.MovieExceptions.InvalidTitleExeption;
 import com.domingostec.MovieApi.Exceptions.UserExceptions.UserNotFoundException;
 import com.domingostec.MovieApi.Repository.UserRepository;
 import com.domingostec.MovieApi.Exceptions.UserExceptions.AccessDeniedException;
+import com.domingostec.MovieApi.Exceptions.MovieExceptions.MovieNotFoundException;
 
 @Service
 public class MovieService {
@@ -35,7 +36,6 @@ public class MovieService {
             movie.getYear()
         );  
     }
-
 
     public MovieResponseDTO createMovie(MovieDTO dto){
         if (movieRepository.existsByTitle(dto.getTitle())) {throw new InvalidTitleExeption("The title already exists.");}
@@ -65,7 +65,6 @@ public class MovieService {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userRepository.findByEmail(email)
                     .orElseThrow(() -> new UserNotFoundException("User Not Found"));
-
         
         Movie movie = movieRepository.findByMovieId(id)
                       .orElseThrow(() -> new AccessDeniedException("Movie Not Found"));
@@ -73,8 +72,7 @@ public class MovieService {
         if(!movie.getUser().getId().equals(user.getId())){
             throw new AccessDeniedException("This movie a not pertence a user logged");
         }   
-        
-        
+            
         movie.setTitle(dto.getTitle());
         movie.setDescription(dto.getDescription());
         movie.setGenre(dto.getGenre());
@@ -82,6 +80,19 @@ public class MovieService {
         movie.setYear(dto.getYear());
 
         return movieRepository.save(movie);
+
+    }
+
+    public void deleteMovie(Long id){
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = userRepository.findByEmail(email)
+                        .orElseThrow(() -> new UserNotFoundException("User not Found"));
+
+        Movie movie = movieRepository.findByIdAndUserId(id, user.getId())
+                        .orElseThrow(() -> new MovieNotFoundException("Movie Not Found"));
+
+
+        movieRepository.delete(movie);
 
     }
 }
