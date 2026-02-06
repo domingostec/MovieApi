@@ -1,5 +1,7 @@
 package com.domingostec.MovieApi.Controller;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.domingostec.MovieApi.DTO.Response.MovieResponseDTO;
+import com.domingostec.MovieApi.Entity.Movie;
 import com.domingostec.MovieApi.Service.MovieService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -33,18 +36,13 @@ public class MovieController {
     }
 
     @GetMapping("/MyList")
-    public void listMovies(){
-        // Lógica para listar os filmes
-    }
-
-    @PostMapping("/Include")
-    public void includeMovie(){
-        // Lógica para incluir o filme na lista
+    public List<Movie> listMovies(){
+        return movieService.getMoviesByLoggedUser();
     }
 
     @PutMapping("/UpdateList")
     public void updateMovieList(){
-        // Lógica para atualizar a lista de filmes
+        
     }
 
     @DeleteMapping("/DeleteMovie")
