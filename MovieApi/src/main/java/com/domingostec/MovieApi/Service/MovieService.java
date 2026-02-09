@@ -66,7 +66,7 @@ public class MovieService {
         User user = userRepository.findByEmail(email)
                     .orElseThrow(() -> new UserNotFoundException("User Not Found"));
         
-        Movie movie = movieRepository.findByMovieId(id)
+        Movie movie = movieRepository.findById(id)
                       .orElseThrow(() -> new AccessDeniedException("Movie Not Found"));
                       
         if(!movie.getUser().getId().equals(user.getId())){

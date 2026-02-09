@@ -14,7 +14,7 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
     List<Movie> findByYear(int year);
     boolean existsByTitle(String title);
     List<Movie> findByUserId(Long userId);
-    Optional<Movie> findByMovieId(long movieId);
+    Optional<Movie> findById(long movieId);
     Optional<Movie> findByIdAndUserId(Long movieId, Long userId);
     void deleteByTitleAndUserId(String title, Long userId);
 }
