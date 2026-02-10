@@ -37,7 +37,6 @@ public class AuthService {
         return new AuthResponseDTO(
             user.getEmail(),
             user.getName(),
-            user.getNumberPhone(),
             token
 
         );
