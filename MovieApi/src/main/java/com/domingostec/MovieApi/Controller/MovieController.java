@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.domingostec.MovieApi.DTO.Response.MovieResponseDTO;
 import com.domingostec.MovieApi.Entity.Movie;
@@ -42,17 +41,17 @@ public class MovieController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Movie> updateMovieList(
+    public ResponseEntity<MovieResponseDTO> updateMovieList(
         @PathVariable Long id,
         @RequestBody MovieDTO dto) {
 
-        Movie updateMovie = movieService.updateMoviesByUserLogged(id, dto);
-        return ResponseEntity.ok(updateMovie);    
+        MovieResponseDTO updateMovie = movieService.updateMoviesByUserLogged(id, dto);
+        return ResponseEntity.ok(updateMovie);     
         
     }
 
-    @DeleteMapping("/DeleteMovie")
-    public ResponseEntity<Long> deleteMovie(@RequestParam Long id, MovieDTO dto){
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteMovie(@PathVariable Long id){
         movieService.deleteMovie(id);
         return ResponseEntity.noContent().build();
     }

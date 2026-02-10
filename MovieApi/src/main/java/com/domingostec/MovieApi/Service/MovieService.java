@@ -40,12 +40,18 @@ public class MovieService {
     public MovieResponseDTO createMovie(MovieDTO dto){
         if (movieRepository.existsByTitle(dto.getTitle())) {throw new InvalidTitleExeption("The title already exists.");}
 
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+
+        User user = userRepository.findByEmail(email)
+                                .orElseThrow(() -> new UserNotFoundException("User Not Found"));
+
         Movie newMovie = Movie.builder()
         .title(dto.getTitle())
         .description(dto.getDescription())
         .genre(dto.getGenre())
         .note(dto.getNote())
         .year(dto.getYear())
+        .user(user)
         .build();
 
         movieRepository.save(newMovie);
@@ -61,7 +67,7 @@ public class MovieService {
             return movieRepository.findByUserId(user.getId());            
     }
 
-    public Movie updateMoviesByUserLogged(Long id, MovieDTO dto){
+    public MovieResponseDTO updateMoviesByUserLogged(Long id, MovieDTO dto){
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userRepository.findByEmail(email)
                     .orElseThrow(() -> new UserNotFoundException("User Not Found"));
@@ -73,13 +79,14 @@ public class MovieService {
             throw new AccessDeniedException("This movie a not pertence a user logged");
         }   
             
-        movie.setTitle(dto.getTitle());
-        movie.setDescription(dto.getDescription());
-        movie.setGenre(dto.getGenre());
-        movie.setNote(dto.getNote());
-        movie.setYear(dto.getYear());
+        if (dto.getTitle() != null) movie.setTitle(dto.getTitle());
+        if (dto.getDescription() != null) movie.setDescription(dto.getDescription());
+        if (dto.getGenre() != null) movie.setGenre(dto.getGenre());
+        if (dto.getYear() != null) movie.setYear(dto.getYear());
+        if (dto.getNote() != null) movie.setNote(dto.getNote());
 
-        return movieRepository.save(movie);
+        Movie updatedMovie = movieRepository.save(movie);
+        return toResponse(updatedMovie);
 
     }
 

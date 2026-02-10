@@ -6,12 +6,9 @@ import com.domingostec.MovieApi.Entity.User;
 import com.domingostec.MovieApi.Exceptions.UserExceptions.InvalidPasswordException;
 import com.domingostec.MovieApi.Exceptions.UserExceptions.UserNotFoundException;
 import com.domingostec.MovieApi.Repository.UserRepository;
+import com.domingostec.MovieApi.Security.JwtUtil;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.security.Keys;
-import java.util.Date;
-import javax.crypto.SecretKey;
 
 @Service
 public class AuthService {
@@ -20,9 +17,12 @@ public class AuthService {
 
     private PasswordEncoder passwordEncoder;
 
-    public AuthService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+      private final JwtUtil jwtUtil;
+
+    public AuthService(UserRepository userRepository, PasswordEncoder passwordEncoder, JwtUtil jwtUtil) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.jwtUtil = jwtUtil;
     }
 
         public AuthResponseDTO loginUser(UserDTO dto) {
@@ -32,7 +32,7 @@ public class AuthService {
             throw new InvalidPasswordException("Invalid Password");
         }
          
-        String token = generateToken(user);
+        String token = jwtUtil.generateToken(user.getEmail());
 
         return new AuthResponseDTO(
             user.getEmail(),
@@ -42,16 +42,5 @@ public class AuthService {
 
         );
     }
-
-    SecretKey key = Keys.secretKeyFor(io.jsonwebtoken.SignatureAlgorithm.HS256);
-    
-    public String generateToken(User user){
-        return Jwts.builder()
-                .setSubject(user.getEmail())
-                .claim("name" , user.getName())
-                .claim("id", user.getId())
-                .setExpiration(new Date(System.currentTimeMillis() + 3600000)) // 1 hour expiration 
-                .signWith(key) 
-                .compact(); }
 
 }

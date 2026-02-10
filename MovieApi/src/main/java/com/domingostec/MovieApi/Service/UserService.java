@@ -37,6 +37,7 @@ public class UserService {
                     throw new UserAlreadyExistsExeption("Email already in use");
              });
         User user = new User();
+        user.setName(dto.getName().toLowerCase());
         user.setEmail(dto.getEmail().toLowerCase());
         user.setPassword(passwordEncoder.encode(dto.getPassword())); 
         user.setNumberPhone(dto.getNumberPhone());      
