@@ -3,8 +3,6 @@
 **MovieApi** é uma aplicação desenvolvida em **Java com Spring Boot** para gerenciamento de filmes.  
 O objetivo é permitir que usuários cadastrem, filtrem e gerenciem sua lista de filmes de forma prática e segura.
 
----
-
 ## 🚀 Funcionalidades
 - Autenticação e autorização com **Spring Security**
 - Cadastro e gerenciamento de usuários
@@ -13,8 +11,6 @@ O objetivo é permitir que usuários cadastrem, filtrem e gerenciem sua lista de
 - Tratativas de exceções com **GlobalExceptionHandler**
 - Retorno amigável para listas vazias (`"Your List is empty"`)
 
----
-
 ## 🛠️ Tecnologias utilizadas
 - **Java 17**
 - **Spring Boot** (Web, Security, Validation)
@@ -22,39 +18,39 @@ O objetivo é permitir que usuários cadastrem, filtrem e gerenciem sua lista de
 - **Banco de dados H2/PostgreSQL**
 - **REST API** com respostas estruturadas em JSON
 
----
-
 ## 📂 Estrutura do projeto
-src/
-├── main/ │
-├── java/com/domingostec/MovieApi/ │
-│ ├── controller/ # Endpoints REST │
-│ ├── service/ # Regras de negócio │
-│ ├── repository/ # Acesso ao banco 
-│ │ ├── exceptions/ # Tratativas de erro │
-│ └── model/ # Entidades │
-└── resources/ │
-├── application.properties │
+src/  
+├── main/ │  
+├── java/com/domingostec/MovieApi/ │  
+│ ├── controller/ # Endpoints REST │  
+│ ├── service/ # Regras de negócio │  
+│ ├── repository/ # Acesso ao banco   
+│ │ ├── exceptions/ # Tratativas de erro │  
+│ └── model/ # Entidades │  
+└── resources/ │  
+├── application.properties │  
 └── data.sql # Dados iniciais (opcional)
 
-
----
-
 ## ▶️ Como executar
-1. Clone o repositório:
-   ```bash
+1. Clone o repositório:  
+   ```bash  
    git clone https://github.com/domingostec/MovieApi.git
-   
+    
 Entre na pasta do projeto:
-cd MovieApi
+```bash 
+cd MovieApi  
 
-Execute com Maven:
-mvn spring-boot:run
+2. Clone o repositório: 
+
+mvn spring-boot:run  
+
 
 Acesse no navegador:
+
 http://localhost:8080/movies/MyList
 
 📌 Exemplos de uso
+
 Listar filmes do usuário logado
 GET /movies/MyList
 
@@ -63,11 +59,12 @@ GET /movies/MyList/genre?genre=Action
 
 Resposta quando lista está vazia
 
-{
-  "message": "Your List is empty",
-  "movies": []
-}
+{  
+  "message": "Your List is empty",  
+  "movies": []  
+}  
+
 
 👨‍💻 Autor
-Projeto desenvolvido por Matheus Domingos  
+Projeto desenvolvido por Matheus Domingos
 🔗 GitHub: domingostec/MovieApi
