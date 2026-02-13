@@ -64,6 +64,6 @@ Resposta quando lista está vazia :
 }
 
 ```
-##👨‍💻 Autor
+👨‍💻 Autor
 Projeto desenvolvido por Matheus Domingos
 🔗 GitHub: domingostec/MovieApi
