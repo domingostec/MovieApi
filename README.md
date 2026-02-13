@@ -61,8 +61,9 @@ Resposta quando lista está vazia :
 {  
   "message": "Your List is empty",  
   "movies": []  
-}  
+}
 
+```
 ##👨‍💻 Autor
 Projeto desenvolvido por Matheus Domingos
 🔗 GitHub: domingostec/MovieApi
