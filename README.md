@@ -57,13 +57,12 @@ Filtrar por gênero :
 `GET /movies/MyList/genre?genre=Action`
 
 Resposta quando lista está vazia : 
-`
+   ```json
 {  
   "message": "Your List is empty",  
   "movies": []  
 }  
-` 
 
-👨‍💻 Autor
+##👨‍💻 Autor
 Projeto desenvolvido por Matheus Domingos
 🔗 GitHub: domingostec/MovieApi
