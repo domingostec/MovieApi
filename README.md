@@ -50,13 +50,13 @@ http://localhost:8080/movies/MyList
 
 📌 Exemplos de uso
 
-Listar filmes do usuário logado
+Listar filmes do usuário logado : 
 `GET /movies/MyList`
 
-Filtrar por gênero
+Filtrar por gênero :
 `GET /movies/MyList/genre?genre=Action`
 
-Resposta quando lista está vazia
+Resposta quando lista está vazia : 
 `
 {  
   "message": "Your List is empty",  
