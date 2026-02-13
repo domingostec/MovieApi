@@ -36,17 +36,16 @@ src/
    ```bash  
    git clone https://github.com/domingostec/MovieApi.git
     
-Entre na pasta do projeto:
-```bash 
-cd MovieApi  
+2. Entre na pasta do projeto:
+   ```bash 
+   cd MovieApi  
 
 2. Clone o repositório: 
-
-mvn spring-boot:run  
+   ```bash
+   mvn spring-boot:run  
 
 
 Acesse no navegador:
-
 http://localhost:8080/movies/MyList
 
 📌 Exemplos de uso
