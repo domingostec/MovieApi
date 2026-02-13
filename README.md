@@ -40,7 +40,7 @@ src/
    ```bash 
    cd MovieApi  
 
-2. Clone o repositório: 
+3. Execute com Maven: 
    ```bash
    mvn spring-boot:run  
 
