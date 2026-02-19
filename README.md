@@ -8,15 +8,13 @@ O objetivo é permitir que usuários cadastrem, filtrem e gerenciem sua lista de
 - Cadastro e gerenciamento de usuários
 - CRUD completo de filmes (inserir, listar, atualizar e deletar)
 - Filtros personalizados (ex.: busca por gênero)
-- Tratativas de exceções com **GlobalExceptionHandler**
-- Retorno amigável para listas vazias (`"Your List is empty"`)
 
 ## 🛠️ Tecnologias utilizadas
 - **Java 17**
 - **Spring Boot** (Web, Security, Validation)
 - **JPA/Hibernate** para persistência
 - **Banco de dados H2/PostgreSQL**
-- **REST API** com respostas estruturadas em JSON
+- **RESTful API** com respostas estruturadas em JSON
 
 ## 📂 Estrutura do projeto
 src/  
