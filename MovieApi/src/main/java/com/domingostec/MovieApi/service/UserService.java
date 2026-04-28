@@ -17,7 +17,7 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    private PasswordEncoder passwordEncoder;
+    private  final PasswordEncoder passwordEncoder;
     
     @Autowired
     public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
@@ -39,7 +39,7 @@ public class UserService {
                     throw new UserAlreadyExistsExeption("Email already in use");
              });
         User user = new User();
-        user.setName(dto.getName().toLowerCase());
+        user.setName(dto.getName());
         user.setEmail(dto.getEmail().toLowerCase());
         user.setPassword(passwordEncoder.encode(dto.getPassword())); 
         user.setNumberPhone(dto.getNumberPhone());      
